@@ -1149,7 +1149,7 @@ git commit -m "feat: add state model, persistence, and buildModel resolver"
 - Create: `index.html`
 - Create: `css/styles.css`
 
-- [ ] **Step 1: Create `index.html`**
+- [x] **Step 1: Create `index.html`**
 
 ```html
 <!doctype html>
@@ -1185,7 +1185,7 @@ git commit -m "feat: add state model, persistence, and buildModel resolver"
 </html>
 ```
 
-- [ ] **Step 2: Create `css/styles.css`**
+- [x] **Step 2: Create `css/styles.css`**
 
 ```css
 :root {
@@ -1270,12 +1270,12 @@ input[type="number"], input[type="text"], select { width:100%; padding:9px 10px;
 }
 ```
 
-- [ ] **Step 3: Serve and eyeball the shell**
+- [x] **Step 3: Serve and eyeball the shell**
 
 Run: `python -m http.server 8000` (or `npx serve -l 8000`), open `http://localhost:8000`.
 Expected: Blue sticky header with title + toggle buttons and a rate input; empty two-column area below. No console errors except the missing `js/app.js` (added next). Stop the server with Ctrl-C when done.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add index.html css/styles.css
