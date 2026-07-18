@@ -1291,7 +1291,7 @@ Builds category/field DOM from `fields.js`, plus the dashboard. Emits change eve
 **Files:**
 - Create: `js/render.js`
 
-- [ ] **Step 1: Implement `js/render.js`**
+- [x] **Step 1: Implement `js/render.js`**
 
 ```js
 // js/render.js
@@ -1567,7 +1567,7 @@ function dashMini(label, val) {
 }
 ```
 
-- [ ] **Step 2: Commit** (verified via the app in the next task)
+- [x] **Step 2: Commit** (verified via the app in the next task)
 
 ```bash
 git add js/render.js
