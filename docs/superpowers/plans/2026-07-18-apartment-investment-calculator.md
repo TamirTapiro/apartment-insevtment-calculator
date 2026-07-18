@@ -37,7 +37,7 @@ Responsibilities are split so each JS file has one job. `calc.js` never touches 
 - Create: `package.json`
 - Create: `tests/calc.test.js` (temporary smoke test, replaced in Task 3)
 
-- [ ] **Step 1: Create `package.json`**
+- [x] **Step 1: Create `package.json`**
 
 ```json
 {
@@ -52,7 +52,7 @@ Responsibilities are split so each JS file has one job. `calc.js` never touches 
 }
 ```
 
-- [ ] **Step 2: Write a smoke test**
+- [x] **Step 2: Write a smoke test**
 
 ```js
 // tests/calc.test.js
@@ -64,12 +64,12 @@ test('smoke: test runner works', () => {
 });
 ```
 
-- [ ] **Step 3: Run the test to verify the runner works**
+- [x] **Step 3: Run the test to verify the runner works**
 
 Run: `npm test`
 Expected: PASS — output includes `# pass 1` and `tests 1`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add package.json tests/calc.test.js
