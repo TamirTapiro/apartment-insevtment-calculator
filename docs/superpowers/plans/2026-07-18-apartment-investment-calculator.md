@@ -84,7 +84,7 @@ git commit -m "chore: scaffold static-site project with node --test runner"
 - Create: `js/data.js`
 - Test: `tests/data.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 // tests/data.test.js
@@ -114,12 +114,12 @@ test('defaults include fixed fees', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/data.test.js`
 Expected: FAIL — cannot find module `../js/data.js`.
 
-- [ ] **Step 3: Implement `js/data.js`**
+- [x] **Step 3: Implement `js/data.js`**
 
 ```js
 // js/data.js — reference figures for 2026. Edit here when figures change.
@@ -170,12 +170,12 @@ export const RENOVATION_HINTS = {
 };
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/data.test.js`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/data.js tests/data.test.js
