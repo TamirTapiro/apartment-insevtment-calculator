@@ -99,3 +99,50 @@ test('formatMoney renders a grouped symbol string', () => {
   assert.equal(formatMoney(3700, { currency: 'ILS', rate: 3.7 }), '₪3,700');
   assert.equal(formatMoney(3700, { currency: 'USD', rate: 3.7 }), '$1,000');
 });
+
+import { computeSummary } from '../js/calc.js';
+
+const baseModel = {
+  price: 2000000,
+  oneTime: { purchaseTax: 160000, brokerage: 47200, attorney: 11800, tabu: 3500,
+             advisor: 8000, fileOpening: 2500, appraiser: 3000, renovation: 150000,
+             furniture: 20000, upgrades: 10000, rentalBrokerage: 6000 },
+  monthly: { lifeBuilding: 150, arnona: 500, houseCommittee: 0, currentBills: 0,
+             buildingContents: 100, incomeTax: 600, repairs: 200, futureFund: 200, management: 300 },
+  annual: { advertising: 500, legal: 500 },
+  mortgage: { enabled: false, loanAmount: 0, monthlyPayment: 0 },
+  rent: 6000, vacancyMonths: 0.5,
+};
+
+test('cash deal: totalInvested = price + all one-time costs', () => {
+  const s = computeSummary(baseModel);
+  // oneTime sum = 422000 ; + price 2,000,000 = 2,422,000
+  assert.equal(s.oneTimeCosts, 422000);
+  assert.equal(s.totalInvested, 2422000);
+});
+
+test('gross yield = annual contract rent / price', () => {
+  const s = computeSummary(baseModel);
+  assert.ok(Math.abs(s.grossYield - (6000 * 12 / 2000000)) < 1e-9); // 0.036
+});
+
+test('monthly total sums monthly items (no mortgage in cash deal)', () => {
+  const s = computeSummary(baseModel);
+  // 150+500+0+0+100+600+200+200+300 = 2050
+  assert.equal(s.monthlyTotal, 2050);
+});
+
+test('financed deal: totalInvested uses down payment and monthly total adds mortgage', () => {
+  const m = { ...baseModel, mortgage: { enabled: true, loanAmount: 1400000, monthlyPayment: 8000 } };
+  const s = computeSummary(m);
+  // downPayment = 2,000,000 - 1,400,000 = 600,000 ; + oneTime 422,000 = 1,022,000
+  assert.equal(s.totalInvested, 1022000);
+  assert.equal(s.monthlyTotal, 2050 + 8000);
+  assert.ok(s.cashOnCash !== null);
+});
+
+test('payback is null when cash flow is not positive', () => {
+  const m = { ...baseModel, monthly: { ...baseModel.monthly, management: 100000 } };
+  const s = computeSummary(m);
+  assert.equal(s.paybackYears, null);
+});

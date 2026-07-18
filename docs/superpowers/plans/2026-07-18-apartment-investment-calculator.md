@@ -547,7 +547,7 @@ model = {
 }
 ```
 
-- [ ] **Step 1: Add the failing test**
+- [x] **Step 1: Add the failing test**
 
 ```js
 import { computeSummary } from '../js/calc.js';
@@ -598,12 +598,12 @@ test('payback is null when cash flow is not positive', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/calc.test.js`
 Expected: FAIL — `computeSummary` not exported.
 
-- [ ] **Step 3: Implement** (append to `js/calc.js`)
+- [x] **Step 3: Implement** (append to `js/calc.js`)
 
 ```js
 const sum = (obj) => Object.values(obj).reduce((a, b) => a + (Number(b) || 0), 0);
@@ -647,12 +647,12 @@ export function computeSummary(model) {
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/calc.test.js`
 Expected: PASS (all calc tests).
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/calc.js tests/calc.test.js

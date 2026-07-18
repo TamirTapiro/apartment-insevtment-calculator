@@ -70,3 +70,43 @@ export function formatPercent(fraction) {
   if (fraction == null || !isFinite(fraction)) return '—';
   return (fraction * 100).toFixed(1) + '%';
 }
+
+const sum = (obj) => Object.values(obj).reduce((a, b) => a + (Number(b) || 0), 0);
+
+export function computeSummary(model) {
+  const { price = 0, oneTime = {}, monthly = {}, annual = {}, mortgage = {}, rent = 0, vacancyMonths = 0 } = model;
+
+  const oneTimeCosts = sum(oneTime);
+  const financed = !!mortgage.enabled;
+  const loanAmount = financed ? (Number(mortgage.loanAmount) || 0) : 0;
+  const monthlyPayment = financed ? (Number(mortgage.monthlyPayment) || 0) : 0;
+  const downPayment = price - loanAmount;
+
+  const totalInvested = (financed ? downPayment : price) + oneTimeCosts;
+
+  const monthlyOperating = sum(monthly);
+  const monthlyTotal = monthlyOperating + monthlyPayment;
+
+  const annualOperating = monthlyOperating * 12 + sum(annual);
+  const annualRentContract = rent * 12;
+  const annualRentEffective = rent * (12 - vacancyMonths);
+  const unoccupancyLoss = rent * vacancyMonths;
+
+  const grossYield = price > 0 ? annualRentContract / price : null;
+  const noi = annualRentEffective - annualOperating;
+  const netYield = totalInvested > 0 ? noi / totalInvested : null;
+
+  const annualMortgage = monthlyPayment * 12;
+  const annualCashFlow = noi - annualMortgage;
+  const monthlyCashFlow = annualCashFlow / 12;
+  const cashOnCash = financed && totalInvested > 0 ? annualCashFlow / totalInvested : null;
+  const paybackYears = annualCashFlow > 0 ? totalInvested / annualCashFlow : null;
+
+  return {
+    oneTimeCosts, downPayment, totalInvested,
+    monthlyOperating, monthlyTotal,
+    annualOperating, annualRentContract, annualRentEffective, unoccupancyLoss,
+    grossYield, noi, netYield,
+    annualMortgage, annualCashFlow, monthlyCashFlow, cashOnCash, paybackYears,
+  };
+}
