@@ -190,7 +190,7 @@ git commit -m "feat: add constants and defaults module"
 - Create: `js/calc.js`
 - Replace smoke test: `tests/calc.test.js`
 
-- [ ] **Step 1: Write the failing test** (replace the whole file)
+- [x] **Step 1: Write the failing test** (replace the whole file)
 
 ```js
 // tests/calc.test.js
@@ -221,12 +221,12 @@ test('defaults to additional regime', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/calc.test.js`
 Expected: FAIL — cannot find module `../js/calc.js`.
 
-- [ ] **Step 3: Implement in `js/calc.js`**
+- [x] **Step 3: Implement in `js/calc.js`**
 
 ```js
 // js/calc.js — pure calculation engine (no DOM).
@@ -247,12 +247,12 @@ export function calcPurchaseTax(price, type = 'additional') {
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/calc.test.js`
 Expected: PASS (5 tests).
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/calc.js tests/calc.test.js
