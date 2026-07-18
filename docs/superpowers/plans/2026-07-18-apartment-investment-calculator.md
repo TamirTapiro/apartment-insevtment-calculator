@@ -963,7 +963,7 @@ git commit -m "feat: add declarative category/field config"
 
 `state.js` owns the default state, `localStorage` load/save, and `buildModel(state)` which resolves overrides/derived fees using `calc.js` and returns the `model` that `computeSummary` consumes.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 // tests/state.test.js
@@ -1011,12 +1011,12 @@ test('buildModel feeds computeSummary without throwing', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/state.test.js`
 Expected: FAIL — module not found.
 
-- [ ] **Step 3: Implement `js/state.js`**
+- [x] **Step 3: Implement `js/state.js`**
 
 ```js
 // js/state.js
@@ -1129,12 +1129,12 @@ export function buildModel(state) {
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/state.test.js`
 Expected: PASS. (Node has no `localStorage`; the tests only call `defaultState`/`buildModel`, so this is fine.)
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/state.js tests/state.test.js
