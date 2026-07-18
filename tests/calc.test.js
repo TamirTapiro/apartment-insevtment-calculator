@@ -51,3 +51,32 @@ test('zero-interest loan divides evenly', () => {
 test('zero loan is zero payment', () => {
   assert.equal(mortgageMonthlyPayment(0, 0.05, 25), 0);
 });
+
+import { calcIncomeTaxMonthly } from '../js/calc.js';
+
+test('10% track: flat on rent', () => {
+  assert.equal(calcIncomeTaxMonthly({ rent: 6000, track: '10' }), 600);
+});
+
+test('exemption: below ceiling is tax-free', () => {
+  assert.equal(calcIncomeTaxMonthly({ rent: 5000, track: 'exemption', marginalRate: 0.31 }), 0);
+});
+
+test('exemption: partial band uses doubled excess * marginal', () => {
+  // taxable = 2*8000 - 2*5654 = 4692 ; 4692 * 0.31 = 1454.52 -> 1455
+  assert.equal(calcIncomeTaxMonthly({ rent: 8000, track: 'exemption', marginalRate: 0.31 }), 1455);
+});
+
+test('exemption: above double ceiling taxes full rent at marginal', () => {
+  // 12000 * 0.31 = 3720
+  assert.equal(calcIncomeTaxMonthly({ rent: 12000, track: 'exemption', marginalRate: 0.31 }), 3720);
+});
+
+test('self-rent offset: deducts capped rent-you-pay, 10% on remainder', () => {
+  // (6000 - 5000) * 10% = 100
+  assert.equal(calcIncomeTaxMonthly({ rent: 6000, track: 'offset', rentYouPay: 5000 }), 100);
+});
+
+test('self-rent offset: rent-you-pay capped at 7500, cannot go negative', () => {
+  assert.equal(calcIncomeTaxMonthly({ rent: 6000, track: 'offset', rentYouPay: 9000 }), 0);
+});

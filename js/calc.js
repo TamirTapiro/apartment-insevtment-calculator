@@ -1,5 +1,5 @@
 // js/calc.js — pure calculation engine (no DOM).
-import { VAT, PURCHASE_TAX_BRACKETS } from './data.js';
+import { VAT, PURCHASE_TAX_BRACKETS, RENT_EXEMPTION_CEILING, RENT_DOUBLE_CEILING, SELF_RENT_OFFSET_CAP } from './data.js';
 
 export function calcPurchaseTax(price, type = 'additional') {
   const brackets = PURCHASE_TAX_BRACKETS[type] || PURCHASE_TAX_BRACKETS.additional;
@@ -28,4 +28,21 @@ export function mortgageMonthlyPayment(loan, annualRate, termYears) {
   if (r === 0) return Math.round(L / n);
   const m = (L * r) / (1 - Math.pow(1 + r, -n));
   return Math.round(m);
+}
+
+export function calcIncomeTaxMonthly({ rent, track = '10', marginalRate = 0.31, rentYouPay = 0 }) {
+  const R = Math.max(0, Number(rent) || 0);
+  if (R === 0) return 0;
+  if (track === '10') return Math.round(R * 0.10);
+  if (track === 'offset') {
+    const deduction = Math.min(Math.max(0, Number(rentYouPay) || 0), SELF_RENT_OFFSET_CAP);
+    const taxable = Math.max(0, R - deduction);
+    return Math.round(taxable * 0.10);
+  }
+  // exemption track
+  const mr = Number(marginalRate) || 0;
+  if (R <= RENT_EXEMPTION_CEILING) return 0;
+  if (R >= RENT_DOUBLE_CEILING) return Math.round(R * mr);
+  const taxable = 2 * R - 2 * RENT_EXEMPTION_CEILING;
+  return Math.round(taxable * mr);
 }

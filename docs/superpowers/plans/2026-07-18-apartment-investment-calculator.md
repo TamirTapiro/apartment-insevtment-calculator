@@ -375,7 +375,7 @@ git commit -m "feat: add mortgage monthly-payment calc"
 - Modify: `js/calc.js`
 - Modify: `tests/calc.test.js`
 
-- [ ] **Step 1: Add the failing test**
+- [x] **Step 1: Add the failing test**
 
 ```js
 import { calcIncomeTaxMonthly } from '../js/calc.js';
@@ -408,12 +408,12 @@ test('self-rent offset: rent-you-pay capped at 7500, cannot go negative', () => 
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/calc.test.js`
 Expected: FAIL — `calcIncomeTaxMonthly` not exported.
 
-- [ ] **Step 3: Implement** (append to `js/calc.js`)
+- [x] **Step 3: Implement** (append to `js/calc.js`)
 
 ```js
 import { RENT_EXEMPTION_CEILING, RENT_DOUBLE_CEILING, SELF_RENT_OFFSET_CAP } from './data.js';
@@ -438,12 +438,12 @@ export function calcIncomeTaxMonthly({ rent, track = '10', marginalRate = 0.31, 
 
 Note: move the new `import` line to the top of `js/calc.js` alongside the existing imports (do not leave imports mid-file).
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/calc.test.js`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/calc.js tests/calc.test.js
