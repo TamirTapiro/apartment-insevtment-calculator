@@ -317,7 +317,7 @@ git commit -m "feat: add percentage-fee calc for brokerage and attorney"
 - Modify: `js/calc.js`
 - Modify: `tests/calc.test.js`
 
-- [ ] **Step 1: Add the failing test**
+- [x] **Step 1: Add the failing test**
 
 ```js
 import { mortgageMonthlyPayment } from '../js/calc.js';
@@ -336,12 +336,12 @@ test('zero loan is zero payment', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/calc.test.js`
 Expected: FAIL — `mortgageMonthlyPayment` not exported.
 
-- [ ] **Step 3: Implement** (append to `js/calc.js`)
+- [x] **Step 3: Implement** (append to `js/calc.js`)
 
 ```js
 export function mortgageMonthlyPayment(loan, annualRate, termYears) {
@@ -355,12 +355,12 @@ export function mortgageMonthlyPayment(loan, annualRate, termYears) {
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/calc.test.js`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/calc.js tests/calc.test.js

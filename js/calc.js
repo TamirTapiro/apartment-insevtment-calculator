@@ -19,3 +19,13 @@ export function calcPercentFee(price, pct, vat = VAT) {
   const value = (Number(price) || 0) * (Number(pct) || 0) * (1 + vat);
   return Math.round(value);
 }
+
+export function mortgageMonthlyPayment(loan, annualRate, termYears) {
+  const L = Math.max(0, Number(loan) || 0);
+  const n = Math.round((Number(termYears) || 0) * 12);
+  if (L === 0 || n === 0) return 0;
+  const r = (Number(annualRate) || 0) / 12;
+  if (r === 0) return Math.round(L / n);
+  const m = (L * r) / (1 - Math.pow(1 + r, -n));
+  return Math.round(m);
+}

@@ -36,3 +36,18 @@ test('attorney: 0.5% + 18% VAT on ₪2,000,000', () => {
   // 2,000,000 * 0.005 * 1.18 = 11,800
   assert.equal(calcPercentFee(2000000, 0.005), 11800);
 });
+
+import { mortgageMonthlyPayment } from '../js/calc.js';
+
+test('amortized payment for ₪1,000,000 at 5% over 25y', () => {
+  const m = mortgageMonthlyPayment(1000000, 0.05, 25);
+  assert.ok(Math.abs(m - 5845.9) < 1, `got ${m}`);
+});
+
+test('zero-interest loan divides evenly', () => {
+  assert.equal(mortgageMonthlyPayment(1000000, 0, 25), Math.round(1000000 / 300));
+});
+
+test('zero loan is zero payment', () => {
+  assert.equal(mortgageMonthlyPayment(0, 0.05, 25), 0);
+});
