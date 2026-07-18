@@ -458,7 +458,7 @@ git commit -m "feat: add rental income-tax calc for all three tracks"
 - Modify: `js/calc.js`
 - Modify: `tests/calc.test.js`
 
-- [ ] **Step 1: Add the failing test**
+- [x] **Step 1: Add the failing test**
 
 ```js
 import { toDisplay, parseToNis, formatMoney } from '../js/calc.js';
@@ -481,12 +481,12 @@ test('formatMoney renders a grouped symbol string', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/calc.test.js`
 Expected: FAIL — functions not exported.
 
-- [ ] **Step 3: Implement** (append to `js/calc.js`)
+- [x] **Step 3: Implement** (append to `js/calc.js`)
 
 ```js
 export function toDisplay(valueNis, currency, rate) {
@@ -514,12 +514,12 @@ export function formatPercent(fraction) {
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/calc.test.js`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/calc.js tests/calc.test.js

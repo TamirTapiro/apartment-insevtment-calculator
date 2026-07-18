@@ -46,3 +46,27 @@ export function calcIncomeTaxMonthly({ rent, track = '10', marginalRate = 0.31, 
   const taxable = 2 * R - 2 * RENT_EXEMPTION_CEILING;
   return Math.round(taxable * mr);
 }
+
+export function toDisplay(valueNis, currency, rate) {
+  const v = Number(valueNis) || 0;
+  if (currency === 'USD') return v / (Number(rate) || 1);
+  return v;
+}
+
+export function parseToNis(input, currency, rate) {
+  const v = Number(input) || 0;
+  if (currency === 'USD') return v * (Number(rate) || 1);
+  return v;
+}
+
+export function formatMoney(valueNis, { currency = 'ILS', rate = 3.7 } = {}) {
+  const shown = toDisplay(valueNis, currency, rate);
+  const symbol = currency === 'USD' ? '$' : '₪';
+  const rounded = Math.round(shown);
+  return symbol + rounded.toLocaleString('en-US');
+}
+
+export function formatPercent(fraction) {
+  if (fraction == null || !isFinite(fraction)) return '—';
+  return (fraction * 100).toFixed(1) + '%';
+}

@@ -80,3 +80,22 @@ test('self-rent offset: deducts capped rent-you-pay, 10% on remainder', () => {
 test('self-rent offset: rent-you-pay capped at 7500, cannot go negative', () => {
   assert.equal(calcIncomeTaxMonthly({ rent: 6000, track: 'offset', rentYouPay: 9000 }), 0);
 });
+
+import { toDisplay, parseToNis, formatMoney } from '../js/calc.js';
+
+test('toDisplay converts ₪ to $ by dividing by rate', () => {
+  assert.equal(toDisplay(3700, 'USD', 3.7), 1000);
+});
+
+test('toDisplay in ₪ returns the same number', () => {
+  assert.equal(toDisplay(3700, 'ILS', 3.7), 3700);
+});
+
+test('parseToNis converts a $ input back to ₪', () => {
+  assert.equal(parseToNis(1000, 'USD', 3.7), 3700);
+});
+
+test('formatMoney renders a grouped symbol string', () => {
+  assert.equal(formatMoney(3700, { currency: 'ILS', rate: 3.7 }), '₪3,700');
+  assert.equal(formatMoney(3700, { currency: 'USD', rate: 3.7 }), '$1,000');
+});
