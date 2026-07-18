@@ -1,0 +1,13 @@
+# Brainstorming visual-companion working files
+.superpowers/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Node (only if tooling is added later)
+node_modules/
+npm-debug.log*
