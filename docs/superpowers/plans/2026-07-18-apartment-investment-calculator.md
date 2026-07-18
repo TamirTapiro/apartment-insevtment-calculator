@@ -667,7 +667,7 @@ git commit -m "feat: add computeSummary aggregates and return metrics"
 - Create: `js/i18n.js`
 - Test: `tests/i18n.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 // tests/i18n.test.js
@@ -691,12 +691,12 @@ test('t falls back to the key when missing', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/i18n.test.js`
 Expected: FAIL — module not found.
 
-- [ ] **Step 3: Implement `js/i18n.js`**
+- [x] **Step 3: Implement `js/i18n.js`**
 
 ```js
 // js/i18n.js — every key must exist in BOTH en and he (enforced by test).
@@ -835,12 +835,12 @@ export function t(key, lang = 'he') {
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/i18n.test.js`
 Expected: PASS. If key-parity fails, add the missing key to the other language — do not delete.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/i18n.js tests/i18n.test.js
