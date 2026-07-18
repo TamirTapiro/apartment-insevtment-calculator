@@ -267,7 +267,7 @@ git commit -m "feat: add progressive purchase-tax calculation"
 - Modify: `js/calc.js`
 - Modify: `tests/calc.test.js`
 
-- [ ] **Step 1: Add the failing test** (append to `tests/calc.test.js`)
+- [x] **Step 1: Add the failing test** (append to `tests/calc.test.js`)
 
 ```js
 import { calcPercentFee } from '../js/calc.js';
@@ -283,12 +283,12 @@ test('attorney: 0.5% + 18% VAT on ₪2,000,000', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/calc.test.js`
 Expected: FAIL — `calcPercentFee` is not exported.
 
-- [ ] **Step 3: Implement** (append to `js/calc.js`)
+- [x] **Step 3: Implement** (append to `js/calc.js`)
 
 ```js
 export function calcPercentFee(price, pct, vat = VAT) {
@@ -297,12 +297,12 @@ export function calcPercentFee(price, pct, vat = VAT) {
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/calc.test.js`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/calc.js tests/calc.test.js

@@ -14,3 +14,8 @@ export function calcPurchaseTax(price, type = 'additional') {
   }
   return Math.round(tax);
 }
+
+export function calcPercentFee(price, pct, vat = VAT) {
+  const value = (Number(price) || 0) * (Number(pct) || 0) * (1 + vat);
+  return Math.round(value);
+}

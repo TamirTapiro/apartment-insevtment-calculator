@@ -24,3 +24,15 @@ test('additional: crosses into 10% slice', () => {
 test('defaults to additional regime', () => {
   assert.equal(calcPurchaseTax(2000000), 160000);
 });
+
+import { calcPercentFee } from '../js/calc.js';
+
+test('brokerage: 2% + 18% VAT on ₪2,000,000', () => {
+  // 2,000,000 * 0.02 * 1.18 = 47,200
+  assert.equal(calcPercentFee(2000000, 0.02), 47200);
+});
+
+test('attorney: 0.5% + 18% VAT on ₪2,000,000', () => {
+  // 2,000,000 * 0.005 * 1.18 = 11,800
+  assert.equal(calcPercentFee(2000000, 0.005), 11800);
+});
