@@ -857,7 +857,7 @@ Plain money fields are declared here and rendered generically. Special controls 
 - Create: `js/fields.js`
 - Test: `tests/fields.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 // tests/fields.test.js
@@ -889,12 +889,12 @@ test('units are limited to once/month/year', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test tests/fields.test.js`
 Expected: FAIL — module not found.
 
-- [ ] **Step 3: Implement `js/fields.js`**
+- [x] **Step 3: Implement `js/fields.js`**
 
 ```js
 // js/fields.js — declarative config. `path` maps into state.values.
@@ -941,12 +941,12 @@ export const CATEGORIES = [
 ];
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `node --test tests/fields.test.js`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add js/fields.js tests/fields.test.js
