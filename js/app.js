@@ -60,6 +60,13 @@ function applyChrome() {
   $('btnLang').textContent = t('toggle_lang', lang);
   $('btnTheme').textContent = dark ? '☀️' : '🌙';
   $('btnReset').textContent = '↺';
+  if (window.matchMedia('(max-width:820px)').matches) {
+    dashRoot.classList.add('collapsed-mobile');
+    mobileBar.hidden = false;
+  } else {
+    dashRoot.classList.remove('collapsed-mobile');
+    mobileBar.hidden = true;
+  }
 }
 
 function renderAll() {
@@ -74,6 +81,10 @@ function wireToggles() {
   $('btnTheme').addEventListener('click', () => { state.ui.dark = !state.ui.dark; saveState(state); applyChrome(); });
   $('rateInput').addEventListener('input', () => { state.ui.rate = Number($('rateInput').value) || 1; saveState(state); renderAll(); });
   $('btnReset').addEventListener('click', () => { clearState(); state = defaultState(); renderAll(); });
+  mobileBar.addEventListener('click', () => {
+    dashRoot.classList.toggle('collapsed-mobile');
+    dashRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 }
 
 wireToggles();

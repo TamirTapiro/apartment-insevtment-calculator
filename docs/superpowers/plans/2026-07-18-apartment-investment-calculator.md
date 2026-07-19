@@ -1700,7 +1700,7 @@ git commit -m "feat: wire app orchestration, toggles, persistence, and list edit
 - Modify: `js/app.js`
 - Modify: `css/styles.css` (only if adjustments needed during verification)
 
-- [ ] **Step 1: Make the mobile bar expand the dashboard**
+- [x] **Step 1: Make the mobile bar expand the dashboard**
 
 Add to `js/app.js` inside `wireToggles()` (before the final two lines):
 
@@ -1723,13 +1723,13 @@ And at the end of `applyChrome()` add responsive default (collapse dashboard on 
   }
 ```
 
-- [ ] **Step 2: Verify on a narrow viewport**
+- [x] **Step 2: Verify on a narrow viewport**
 
 Run: `python -m http.server 8000`, open `http://localhost:8000`, set the browser to a mobile width (~390px, DevTools device toolbar).
 Verify: dashboard is hidden; a sticky bottom bar shows Net yield + Monthly cash flow; tapping it reveals the full dashboard. Resize wide → sidebar returns, bar hides.
 Expected: correct responsive behavior in both directions; verify once in Hebrew (RTL) and once in English (LTR).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add js/app.js css/styles.css
