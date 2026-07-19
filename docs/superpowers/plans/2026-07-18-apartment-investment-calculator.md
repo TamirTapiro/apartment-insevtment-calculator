@@ -1743,7 +1743,7 @@ git commit -m "feat: add expandable mobile summary bar and responsive polish"
 **Files:**
 - Create: `README.md`
 
-- [ ] **Step 1: Write `README.md`**
+- [x] **Step 1: Write `README.md`**
 
 ```markdown
 # Apartment Investment Calculator (Israel)
@@ -1776,12 +1776,12 @@ All tax brackets, ceilings and default fees live in `js/data.js`. Update them th
 > Estimates only — 2026 reference figures, not tax advice.
 ```
 
-- [ ] **Step 2: Final full-suite run**
+- [x] **Step 2: Final full-suite run**
 
 Run: `npm test`
 Expected: PASS (all suites).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add README.md
