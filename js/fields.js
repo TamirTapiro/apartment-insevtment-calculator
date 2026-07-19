@@ -23,6 +23,7 @@ export const CATEGORIES = [
     { id: 'upgrades', path: 'upgrades', labelKey: 'f_upgrades', unit: 'once', tooltipKey: 'tt_upgrades', widget: 'itemlist' },
   ]},
   { id: 'operating', titleKey: 'cat_operating', fields: [
+    { id: 'rent', path: 'rent', labelKey: 'f_rent', unit: 'month', tooltipKey: 'tt_rent', widget: 'money' },
     { id: 'arnona', path: 'arnona', labelKey: 'f_arnona', unit: 'month', tooltipKey: 'tt_arnona', widget: 'arnona' },
     { id: 'houseCommittee', path: 'houseCommittee', labelKey: 'f_house_committee', unit: 'month', tooltipKey: 'tt_house_committee', widget: 'money' },
     { id: 'currentBills', path: 'currentBills', labelKey: 'f_bills', unit: 'month', tooltipKey: 'tt_bills', widget: 'money' },
@@ -38,5 +39,6 @@ export const CATEGORIES = [
     { id: 'management', path: 'management', labelKey: 'f_management', unit: 'month', tooltipKey: 'tt_management', widget: 'money' },
     { id: 'advertising', path: 'advertising', labelKey: 'f_advertising', unit: 'year', tooltipKey: 'tt_advertising', widget: 'money' },
     { id: 'legal', path: 'legal', labelKey: 'f_legal', unit: 'year', tooltipKey: 'tt_legal', widget: 'money' },
+    { id: 'vacancy', path: 'vacancyMonths', labelKey: 'f_vacancy', unit: 'once', tooltipKey: 'tt_vacancy', widget: 'number' },
   ]},
 ];

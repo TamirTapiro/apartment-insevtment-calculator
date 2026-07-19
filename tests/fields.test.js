@@ -25,3 +25,9 @@ test('units are limited to once/month/year', () => {
     }
   }
 });
+
+test('includes inputs for expected rent and vacancy (drive return metrics)', () => {
+  const paths = CATEGORIES.flatMap((c) => c.fields.map((f) => f.path));
+  assert.ok(paths.includes('rent'), 'missing rent input');
+  assert.ok(paths.includes('vacancyMonths'), 'missing vacancy input');
+});

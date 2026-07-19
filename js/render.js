@@ -62,6 +62,13 @@ function buildField(f, state, ctx) {
       appendTipLast(moneyInput(v[f.path], state.ui, (nis) => set(f.path, nis)));
       break;
     }
+    case 'number': {
+      const inp = el('input'); inp.type = 'number'; inp.step = 'any'; inp.inputMode = 'decimal';
+      inp.value = (v[f.path] === '' || v[f.path] == null) ? '' : v[f.path];
+      inp.addEventListener('input', () => set(f.path, inp.value === '' ? 0 : Number(inp.value) || 0));
+      appendTipLast(inp);
+      break;
+    }
     case 'apt-type': {
       const sel = el('select');
       for (const [val, key] of [['additional', 'apt_additional'], ['single', 'apt_single']]) {
@@ -73,7 +80,8 @@ function buildField(f, state, ctx) {
     }
     case 'computed-tax': {
       const box = el('div', 'row');
-      const shown = el('div', 'computed', formatMoney(ctx.derived.purchaseTax, state.ui));
+      const shown = el('div', 'computed js-derived', formatMoney(ctx.derived.purchaseTax, state.ui));
+      shown.dataset.key = 'purchaseTax';
       const override = el('input'); override.type = 'number'; override.placeholder = t('f_override', lang);
       override.value = v.purchaseTaxOverride != null ? Math.round(toDisplay(v.purchaseTaxOverride, state.ui.currency, state.ui.rate)) : '';
       override.addEventListener('input', () => set('purchaseTaxOverride', override.value === '' ? null : parseToNis(override.value, state.ui.currency, state.ui.rate)));
@@ -87,7 +95,8 @@ function buildField(f, state, ctx) {
       pct.title = t('f_pct', lang);
       pct.addEventListener('input', () => set(f.pctPath, (Number(pct.value) || 0) / 100));
       const shownKey = f.id === 'brokerage' ? 'brokerage' : 'attorney';
-      const shown = el('div', 'computed', formatMoney(ctx.derived[shownKey], state.ui));
+      const shown = el('div', 'computed js-derived', formatMoney(ctx.derived[shownKey], state.ui));
+      shown.dataset.key = shownKey;
       const override = el('input'); override.type = 'number'; override.placeholder = t('f_override', lang);
       const ovPath = f.id === 'brokerage' ? 'brokerageOverride' : 'attorneyOverride';
       override.value = v[ovPath] != null ? Math.round(toDisplay(v[ovPath], state.ui.currency, state.ui.rate)) : '';
@@ -152,7 +161,9 @@ function buildMortgage(state, ctx) {
     term.addEventListener('input', () => set('mortgage.termYears', Number(term.value) || 0));
     terms.append(rate, term);
     box.appendChild(terms);
-    box.appendChild(el('div', 'muted', t('f_monthly_payment', lang) + ': ' + formatMoney(ctx.derived.monthlyPayment, state.ui)));
+    const mp = el('div', 'muted js-derived', t('f_monthly_payment', lang) + ': ' + formatMoney(ctx.derived.monthlyPayment, state.ui));
+    mp.dataset.key = 'monthlyPayment'; mp.dataset.prefix = t('f_monthly_payment', lang) + ': ';
+    box.appendChild(mp);
     wrap.appendChild(box);
   }
   return wrap;
@@ -220,7 +231,9 @@ function buildIncomeTax(state, ctx) {
   if (v.incomeTrack === 'offset') {
     wrap.appendChild(moneyInput(v.rentYouPay, state.ui, (nis) => set('rentYouPay', nis)));
   }
-  wrap.appendChild(el('div', 'muted', t('f_income_tax', lang) + ': ' + formatMoney(ctx.derived.incomeTax, state.ui) + ' ' + t('unit_month', lang)));
+  const itd = el('div', 'muted js-derived', t('f_income_tax', lang) + ': ' + formatMoney(ctx.derived.incomeTax, state.ui) + ' ' + t('unit_month', lang));
+  itd.dataset.key = 'incomeTax'; itd.dataset.prefix = t('f_income_tax', lang) + ': '; itd.dataset.suffix = ' ' + t('unit_month', lang);
+  wrap.appendChild(itd);
   return wrap;
 }
 
@@ -268,4 +281,17 @@ export function renderDashboard(root, mobileBar, summary, state) {
 }
 function dashMini(label, val) {
   const d = el('div'); d.append(el('div', 'muted', label), el('div', null, val)); return d;
+}
+
+// Refresh inline computed mirrors (purchase tax, brokerage, attorney, mortgage
+// payment, income tax) in place, without rebuilding inputs (preserves focus).
+export function refreshDerived(root, derived, ui) {
+  if (!root) return;
+  for (const node of root.querySelectorAll('.js-derived')) {
+    const key = node.dataset.key;
+    if (!key || !(key in derived)) continue;
+    const prefix = node.dataset.prefix || '';
+    const suffix = node.dataset.suffix || '';
+    node.textContent = prefix + formatMoney(derived[key], ui) + suffix;
+  }
 }
