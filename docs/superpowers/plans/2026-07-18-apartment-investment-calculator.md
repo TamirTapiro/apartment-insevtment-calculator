@@ -1583,7 +1583,7 @@ Wires load → render → recalc, the three toggles + rate + reset, nested `set(
 **Files:**
 - Create: `js/app.js`
 
-- [ ] **Step 1: Implement `js/app.js`**
+- [x] **Step 1: Implement `js/app.js`**
 
 ```js
 // js/app.js
@@ -1667,7 +1667,7 @@ wireToggles();
 renderAll();
 ```
 
-- [ ] **Step 2: Serve and verify the app end-to-end**
+- [x] **Step 2: Serve and verify the app end-to-end**
 
 Run: `python -m http.server 8000`, open `http://localhost:8000`.
 Verify:
@@ -1680,12 +1680,12 @@ Verify:
 - Add a **furniture** row (＋), type a cost → Total invested increases; delete row → decreases.
 Expected: all above behave correctly; no console errors.
 
-- [ ] **Step 3: Run the whole unit suite**
+- [x] **Step 3: Run the whole unit suite**
 
 Run: `npm test`
 Expected: PASS — all calc/data/i18n/fields/state tests green.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add js/app.js
